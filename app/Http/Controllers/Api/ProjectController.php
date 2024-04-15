@@ -16,8 +16,13 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::select(['id', 'type_id', 'title', 'content'])
+        ->orderBy('created_at', 'DESC')
         ->with('type:id,label,color')
         ->paginate();
+
+        foreach($projects as $project){
+            $project->content = $project->getContent(50);
+        }
         
         return response()->json($projects);
     }
@@ -41,7 +46,12 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        //
+        $projects = Project::select(['id', 'type_id', 'title', 'content'])
+        ->where('id', $id)
+        ->with('type:id,label,color')
+        ->first();
+
+        return response()->json($projects);
     }
 
     /**

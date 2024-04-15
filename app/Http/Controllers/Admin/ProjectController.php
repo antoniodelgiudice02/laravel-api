@@ -18,12 +18,12 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $projects = Project::orderBy('id', 'desc')->paginate(10);
+    // public function index()
+    // {
+    //     $projects = Project::orderBy('id', 'desc')->paginate(10);
         
-        return view('admin.projects.index', compact('projects', ));
-    }
+    //     return view('admin.projects.index', compact('projects', ));
+    // }
 
     /**
      * Show the form for creating a new resource.
