@@ -16,8 +16,8 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::select(['id', 'type_id', 'title', 'content'])
-        ->orderBy('created_at', 'DESC')
-        ->with('type:id,label,color')
+        ->orderBy('id', 'DESC')
+        ->with('type:id,label,color', 'technologies:id,label,color')
         ->paginate();
 
         foreach($projects as $project){
@@ -48,7 +48,7 @@ class ProjectController extends Controller
     {
         $projects = Project::select(['id', 'type_id', 'title', 'content'])
         ->where('id', $id)
-        ->with('type:id,label,color')
+        ->with('type:id,label,color', 'technologies:id,label,color')
         ->first();
 
         return response()->json($projects);
